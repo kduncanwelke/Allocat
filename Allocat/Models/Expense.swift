@@ -26,6 +26,7 @@ enum Type: String {
     case health = "Health"
     case home = "Home"
     case housing = "Housing"
+    case insurance = "Insurance"
     case gifts = "Gifts"
     case media = "Media"
     case none = "None"
@@ -35,7 +36,9 @@ enum Type: String {
     case pet = "Pet"
     case services = "Services"
     case subscriptions = "Subscriptions"
+    case tax = "Taxes"
     case tools = "Tools"
+    case transportation = "Transportation"
     case travel = "Travel"
     case utilities = "Utilities"
 }
