@@ -25,6 +25,7 @@
 		2DBEE5F323C91ADB0046DF8A /* Month.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBEE5F223C91ADB0046DF8A /* Month.swift */; };
 		2DBEE5F723C9217F0046DF8A /* SavedData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2DBEE5F523C9217F0046DF8A /* SavedData.xcdatamodeld */; };
 		2DBEE5F923C931F40046DF8A /* ExpenseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBEE5F823C931F40046DF8A /* ExpenseViewController.swift */; };
+		2DC4FA2623D1175600AE662B /* EntryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC4FA2523D1175600AE662B /* EntryTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,7 @@
 		2DBEE5F223C91ADB0046DF8A /* Month.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Month.swift; sourceTree = "<group>"; };
 		2DBEE5F623C9217F0046DF8A /* SavedData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SavedData.xcdatamodel; sourceTree = "<group>"; };
 		2DBEE5F823C931F40046DF8A /* ExpenseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseViewController.swift; sourceTree = "<group>"; };
+		2DC4FA2523D1175600AE662B /* EntryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +169,7 @@
 			isa = PBXGroup;
 			children = (
 				2D57DD9323C7E66B0036FFEE /* ViewController.swift */,
+				2DC4FA2523D1175600AE662B /* EntryTableViewCell.swift */,
 				2DBEE5F823C931F40046DF8A /* ExpenseViewController.swift */,
 				2D15EAB223CCEC0D00A15847 /* IncomeViewController.swift */,
 			);
@@ -323,6 +326,7 @@
 				2D57DD9423C7E66B0036FFEE /* ViewController.swift in Sources */,
 				2D57DD9023C7E66B0036FFEE /* AppDelegate.swift in Sources */,
 				2DBEE5EF23C8F27C0046DF8A /* Income.swift in Sources */,
+				2DC4FA2623D1175600AE662B /* EntryTableViewCell.swift in Sources */,
 				2DAD1B3223CE332300A54CD4 /* Extensions.swift in Sources */,
 				2D57DD9223C7E66B0036FFEE /* SceneDelegate.swift in Sources */,
 				2DAD1B3623CE725600A54CD4 /* EntryManager.swift in Sources */,

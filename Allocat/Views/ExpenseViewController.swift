@@ -26,7 +26,6 @@ class ExpenseViewController: UIViewController {
     @IBOutlet weak var selectedDate: UILabel!
     @IBOutlet weak var selectedType: UILabel!
     @IBOutlet weak var selectedSource: UILabel!
-    
     @IBOutlet weak var noteTextField: UITextField!
     
     
@@ -57,6 +56,17 @@ class ExpenseViewController: UIViewController {
     }
     
     // MARK: Custom functions
+    
+    func resetForm() {
+        amount.text = nil
+        name.text = nil
+        selectedSource.text = "None"
+        selectedType.text = "None"
+        datePicker.setDate(Date(), animated: false)
+        typePicker.reloadAllComponents()
+        sourcePicker.reloadAllComponents()
+        noteTextField.text = nil
+    }
     
     func getStringDate(from date: Date) -> String {
         let createdDate = dateFormatter.string(from: date)
@@ -104,7 +114,8 @@ class ExpenseViewController: UIViewController {
             //showAlert(title: "Save failed", message: "Notice: Data has not successfully been saved.")
         }
         
-        //NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refresh"), object: nil)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refresh"), object: nil)
+        resetForm()
         //NotificationCenter.default.post(name: NSNotification.Name(rawValue: "getNextPage"), object: nil)
         //self.dismiss(animated: true, completion: nil)
     }

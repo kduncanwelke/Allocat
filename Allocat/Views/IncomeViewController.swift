@@ -51,6 +51,15 @@ class IncomeViewController: UIViewController {
     
     // MARK: Custom functions
     
+    func resetForm() {
+        amount.text = nil
+        name.text = nil
+        chosenCategory.text = "None"
+        datePicker.setDate(Date(), animated: false)
+        categoryPicker.reloadAllComponents()
+        note.text = nil
+    }
+    
     func getStringDate(from date: Date) -> String {
         let createdDate = dateFormatter.string(from: date)
         return createdDate
@@ -96,6 +105,9 @@ class IncomeViewController: UIViewController {
             // this should never be displayed but is here to cover the possibility
             //showAlert(title: "Save failed", message: "Notice: Data has not successfully been saved.")
         }
+        
+        resetForm()
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refresh"), object: nil)
     }
     
     /*
