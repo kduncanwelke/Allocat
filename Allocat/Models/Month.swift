@@ -9,5 +9,6 @@
 import Foundation
 
 struct Month {
-    var expenses: [Entry] = []
+    var entries: [Entry] = []
 }
+

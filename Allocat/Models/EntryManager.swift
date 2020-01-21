@@ -10,7 +10,9 @@ import Foundation
 
 struct EntryManager {
     static var entries: [Entry] = []
-    static var expenses: [Expense] = []
-    static var incomes: [Income] = []
     static var savedEntries: [SavedEntry] = []
+
+    static var expenses: [[Expense]] = [[]]
+    static var incomes: [[Income]] = [[]]
+    static var all: [[Entry]] = [[]]
 }

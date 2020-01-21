@@ -36,6 +36,8 @@ class IncomeViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         datePicker.addTarget(self, action: #selector(datePickerChanged(picker:)), for: .valueChanged)
+        datePicker.maximumDate = Date()
+        
         dateFormatter.dateFormat = "yyyy-MM-dd"
         
         dimView.isHidden = true
@@ -90,13 +92,13 @@ class IncomeViewController: UIViewController {
         
         EntryManager.savedEntries.append(newIncome)
         
-        if let selectedText = chosenCategory.text, let type = Category(rawValue: selectedText) {
+        /*if let selectedText = chosenCategory.text, let type = Category(rawValue: selectedText) {
             
             let income = Income(name: chosenName, date: datePicker.date, amount: newIncome.amount, note: note.text ?? "", category: type)
             
             EntryManager.entries.append(income)
             EntryManager.incomes.append(income)
-        }
+        }*/
         
         do {
             try managedContext.save()

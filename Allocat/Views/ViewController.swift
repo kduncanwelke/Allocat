@@ -19,6 +19,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var tableView: UITableView!
     
+    // MARK: Variables
     
     var totalOut = 0.0
     var totalIn = 0.0
@@ -40,28 +41,124 @@ class ViewController: UIViewController {
     
     // MARK: Custom functions
     
+    func groupEntries(entries: [Entry]) -> [[Entry]] {
+        var arrayedEntries: [[Entry]] = [[]]
+        var index = 0
+        var previousDate = Date()
+        
+        for entry in entries {
+            print(entry.date)
+            
+            print(Calendar.current.isDate(entry.date, equalTo: previousDate, toGranularity: .year))
+            print(Calendar.current.isDate(entry.date, equalTo: previousDate, toGranularity: .month))
+            
+            if Calendar.current.isDate(entry.date, equalTo: Date(), toGranularity: .year) &&  Calendar.current.isDate(entry.date, equalTo: Date(), toGranularity: .month) {
+                arrayedEntries[index].append(entry)
+                
+                switch entry {
+                case is Income:
+                    if let income = entry as? Income {
+                        EntryManager.incomes[index].append(income)
+                    }
+                case is Expense:
+                    if let expense = entry as? Expense {
+                        EntryManager.expenses[index].append(expense)
+                    }
+                default:
+                    break
+                }
+                previousDate = entry.date
+                print(index)
+            } else {
+                print(index)
+                
+                if Calendar.current.isDate(entry.date, equalTo: previousDate, toGranularity: .year) &&  Calendar.current.isDate(entry.date, equalTo: previousDate, toGranularity: .month) {
+                    arrayedEntries[index].append(entry)
+                    
+                    switch entry {
+                    case is Income:
+                        if let income = entry as? Income {
+                            EntryManager.incomes[index].append(income)
+                        }
+                    case is Expense:
+                        if let expense = entry as? Expense {
+                            EntryManager.expenses[index].append(expense)
+                        }
+                    default:
+                        break
+                    }
+                    
+                    previousDate = entry.date
+                } else {
+                    index += 1
+                    arrayedEntries.append([])
+                    arrayedEntries[index].append(entry)
+                    
+                    switch entry {
+                    case is Income:
+                        EntryManager.incomes.append([])
+                        if let income = entry as? Income {
+                            EntryManager.incomes[index].append(income)
+                        }
+                    case is Expense:
+                        EntryManager.expenses.append([])
+                        if let expense = entry as? Expense {
+                            EntryManager.expenses[index].append(expense)
+                        }
+                    default:
+                        break
+                    }
+                    previousDate = entry.date
+                }
+            }
+        }
+        
+        updateTotals()
+        print(arrayedEntries)
+        return arrayedEntries
+    }
+    
     func updateTotals() {
         totalOut = 0.0
         totalIn = 0.0
         
-        for expense in EntryManager.expenses {
-            totalOut += expense.amount
+        if let expenses = EntryManager.expenses.first, let incomes = EntryManager.incomes.first {
+            for expense in expenses  {
+                totalOut += expense.amount ?? 0
+            }
+            
+            for income in incomes {
+                totalIn += income.amount ?? 0
+            }
         }
-        
-        for income in EntryManager.incomes {
-            totalIn += income.amount
-        }
+    
+        let netAmount = totalIn - totalOut
         
         let outPriceString = currencyFormatter.string(from: NSNumber(value: totalOut)) ?? " "
         let inPriceString = currencyFormatter.string(from: NSNumber(value: totalIn)) ?? " "
+        let netPriceString = currencyFormatter.string(from: NSNumber(value: netAmount)) ?? " "
         
         moneyOut.text = "-\(outPriceString)"
         moneyIn.text = "+\(inPriceString)"
+        
         limitSpent.text = "\(outPriceString) of $ spent"
     }
     
     @objc func refresh() {
-        updateTotals()
+        EntryManager.entries.removeAll()
+        
+        EntryManager.all.removeAll()
+        EntryManager.all.append([])
+        
+        EntryManager.expenses.removeAll()
+        EntryManager.expenses.append([])
+        
+        EntryManager.incomes.removeAll()
+        EntryManager.incomes.append([])
+        
+        EntryManager.savedEntries.removeAll()
+        loadEntries()
+        
         tableView.reloadData()
     }
     
@@ -79,21 +176,20 @@ class ViewController: UIViewController {
                        
                         let newIncome = Income(name: name, date: date, amount: entry.amount, note: note, category: category)
                         EntryManager.entries.append(newIncome)
-                        EntryManager.incomes.append(newIncome)
                     }
                 } else {
                     if let name = entry.name, let date = entry.date, let note = entry.note, let typeText = entry.type, let type = Type(rawValue: typeText), let sourceText = entry.source, let source = Source(rawValue: sourceText) {
                       
                         let newExpense = Expense(name: name, amount: entry.amount, date: date, note: note, source: source, type: type)
                         EntryManager.entries.append(newExpense)
-                        EntryManager.expenses.append(newExpense)
                     }
                 }
             }
             
-          
             EntryManager.entries = EntryManager.entries.sorted(by: {$0.date > $1.date})
-            updateTotals()
+            print(EntryManager.entries)
+        
+            EntryManager.all = groupEntries(entries: EntryManager.entries)
         } catch let error as NSError {
             //showAlert(title: "Could not retrieve data", message: "\(error.userInfo)")
         }
@@ -105,7 +201,6 @@ class ViewController: UIViewController {
         tableView.reloadData()
     }
     
-    
     @IBAction func addIncomeTapped(_ sender: UIButton) {
         performSegue(withIdentifier: "addIncome", sender: Any?.self)
     }
@@ -116,16 +211,60 @@ class ViewController: UIViewController {
 }
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         switch segmentedControl.selectedSegmentIndex {
         case 0:
-            return EntryManager.entries.count
+            return EntryManager.all.count
         case 1:
             return EntryManager.incomes.count
         case 2:
             return EntryManager.expenses.count
         default:
             return 0
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        switch segmentedControl.selectedSegmentIndex {
+        case 0:
+            return EntryManager.all[section].count
+        case 1:
+            return EntryManager.incomes[section].count
+        case 2:
+            return EntryManager.expenses[section].count
+        default:
+            return 0
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        switch segmentedControl.selectedSegmentIndex {
+        case 0:
+            if let item = EntryManager.all[section].first {
+                let month = item.date.monthAsString()
+                let year = item.date.yearAsString()
+                return "\(month) \(year)"
+            } else {
+                return nil
+            }
+        case 1:
+            if let item = EntryManager.incomes[section].first {
+                let month = item.date.monthAsString()
+                let year = item.date.yearAsString()
+                return "\(month) \(year)"
+            } else {
+                return nil
+            }
+        case 2:
+            if let item = EntryManager.expenses[section].first {
+                let month = item.date.monthAsString()
+                let year = item.date.yearAsString()
+                return "\(month) \(year)"
+            } else {
+                return nil
+            }
+        default:
+            return nil
         }
     }
     
@@ -136,13 +275,13 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         
         switch segmentedControl.selectedSegmentIndex {
         case 0:
-            object = EntryManager.entries[indexPath.row]
+            object = EntryManager.all[indexPath.section][indexPath.row]
         case 1:
-            object = EntryManager.incomes[indexPath.row]
+            object = EntryManager.incomes[indexPath.section][indexPath.row]
         case 2:
-            object = EntryManager.expenses[indexPath.row]
+            object = EntryManager.expenses[indexPath.section][indexPath.row]
         default:
-            object = EntryManager.entries[indexPath.row]
+            object = EntryManager.all[indexPath.section][indexPath.row]
         }
         
         cell.nameLabel.text = object.name

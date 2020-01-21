@@ -28,3 +28,17 @@ extension UIView {
         })
     }
 }
+
+extension Date {
+    func monthAsString() -> String {
+        let df = DateFormatter()
+        df.setLocalizedDateFormatFromTemplate("MMM")
+        return df.string(from: self)
+    }
+    
+    func yearAsString() -> String {
+        let df = DateFormatter()
+        df.setLocalizedDateFormatFromTemplate("YYYY")
+        return df.string(from: self)
+    }
+}

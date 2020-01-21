@@ -41,6 +41,8 @@ class ExpenseViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         datePicker.addTarget(self, action: #selector(datePickerChanged(picker:)), for: .valueChanged)
+        datePicker.maximumDate = Date()
+        
         dateFormatter.dateFormat = "yyyy-MM-dd"
         
         dimView.isHidden = true
@@ -98,13 +100,13 @@ class ExpenseViewController: UIViewController {
         
         EntryManager.savedEntries.append(newExpense)
         
-        if let selectedText = selectedType.text, let selectedSource = selectedSource.text,  let type = Type(rawValue: selectedText), let source = Source(rawValue: selectedSource) {
+        /*if let selectedText = selectedType.text, let selectedSource = selectedSource.text,  let type = Type(rawValue: selectedText), let source = Source(rawValue: selectedSource) {
             
             let expense = Expense(name: chosenName, amount: newExpense.amount, date: datePicker.date, note: noteTextField.text ?? "", source: source, type: type)
             
             EntryManager.entries.append(expense)
             EntryManager.expenses.append(expense)
-        }
+        }*/
         
         do {
             try managedContext.save()
