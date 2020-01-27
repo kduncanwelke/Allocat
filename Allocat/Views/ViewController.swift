@@ -197,6 +197,10 @@ class ViewController: UIViewController {
 
     // MARK: IBActions
     
+    @IBAction func setBudgetPressed(_ sender: UIButton) {
+        performSegue(withIdentifier: "setBudget", sender: Any?.self)
+    }
+    
     @IBAction func segmentChanged(_ sender: UISegmentedControl) {
         tableView.reloadData()
     }

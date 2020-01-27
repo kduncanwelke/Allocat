@@ -230,11 +230,22 @@ extension ExpenseViewController: UITextFieldDelegate {
             return true
         } else {
             if string == "." {
-                let countdots = textField.text!.components(separatedBy:".").count - 1
-                if countdots == 0 {
+                let countDots = textField.text!.components(separatedBy:".").count - 1
+                if countDots == 0 {
                     return true
                 } else {
-                    if countdots > 0 && string == "." {
+                    if countDots > 0 && string == "." {
+                        return false
+                    } else {
+                        return true
+                    }
+                }
+            } else if string == "," {
+                let countCommas = textField.text!.components(separatedBy:",").count - 1
+                if countCommas == 0 {
+                    return true
+                } else {
+                    if countCommas > 0 && string == "," {
                         return false
                     } else {
                         return true

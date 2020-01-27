@@ -16,7 +16,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="EEi-td-jyP">
-                                <rect key="frame" x="15" y="54" width="384" height="137"/>
+                                <rect key="frame" x="15" y="54" width="384" height="146.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Most Recent Month" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i3R-6y-Uof">
                                         <rect key="frame" x="0.0" y="0.0" width="384" height="19.5"/>
@@ -41,21 +41,54 @@
                                             </label>
                                         </subviews>
                                     </stackView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$ out of $ spent" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2dC-dk-l3Y">
-                                        <rect key="frame" x="0.0" y="65.5" width="384" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="eca-wG-tCr">
+                                        <rect key="frame" x="0.0" y="65.5" width="384" height="30"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pr8-7E-176">
+                                                <rect key="frame" x="0.0" y="14.5" width="102.5" height="1"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="1" id="ASO-aK-nI1"/>
+                                                </constraints>
+                                            </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$ out of $ spent" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2dC-dk-l3Y">
+                                                <rect key="frame" x="111" y="5" width="122.5" height="20"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CLf-XU-KVS">
+                                                <rect key="frame" x="242" y="0.0" width="31" height="30"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                <state key="normal" title="Set?"/>
+                                                <connections>
+                                                    <action selector="setBudgetPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="mrS-bE-y4p"/>
+                                                </connections>
+                                            </button>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fez-Kf-9bf">
+                                                <rect key="frame" x="281.5" y="14.5" width="102.5" height="1"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="1" id="XcB-gu-0LQ"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="fez-Kf-9bf" firstAttribute="top" secondItem="eca-wG-tCr" secondAttribute="top" constant="14.5" id="CR4-3v-67e"/>
+                                            <constraint firstAttribute="trailing" secondItem="pr8-7E-176" secondAttribute="trailing" constant="281.5" id="Hdc-SL-Fd5"/>
+                                            <constraint firstItem="CLf-XU-KVS" firstAttribute="leading" secondItem="2dC-dk-l3Y" secondAttribute="trailing" constant="8.5" id="dGd-Ou-Ywo"/>
+                                            <constraint firstItem="2dC-dk-l3Y" firstAttribute="top" secondItem="eca-wG-tCr" secondAttribute="top" constant="5" id="iqt-gm-6jU"/>
+                                        </constraints>
+                                    </stackView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="83M-eG-LnY">
-                                        <rect key="frame" x="0.0" y="91" width="384" height="10"/>
+                                        <rect key="frame" x="0.0" y="100.5" width="384" height="10"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="10" id="b3C-Pe-gRS"/>
                                         </constraints>
                                     </view>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="9XL-Tl-ArG">
-                                        <rect key="frame" x="0.0" y="106" width="384" height="32"/>
+                                        <rect key="frame" x="0.0" y="115.5" width="384" height="32"/>
                                         <color key="backgroundColor" systemColor="secondarySystemGroupedBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <segments>
                                             <segment title="All"/>
@@ -99,7 +132,7 @@
                                 </subviews>
                             </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cip-tP-InR">
-                                <rect key="frame" x="0.0" y="212.5" width="414" height="555.5"/>
+                                <rect key="frame" x="0.0" y="222" width="414" height="546"/>
                                 <color key="backgroundColor" systemColor="systemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="entryCell" rowHeight="60" id="4i0-aE-ZcV" customClass="EntryTableViewCell" customModule="Allocat" customModuleProvider="target">
@@ -164,11 +197,196 @@
                         <outlet property="tableView" destination="cip-tP-InR" id="JUP-JA-IYZ"/>
                         <segue destination="Wo9-Dv-Ubd" kind="presentation" identifier="addExpense" id="J9D-Dx-QlL"/>
                         <segue destination="Khf-M5-1EB" kind="presentation" identifier="addIncome" id="KeF-RI-9am"/>
+                        <segue destination="OPb-AW-FMZ" kind="show" identifier="setBudget" id="v7u-bQ-DnX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="137.68115942028987" y="116.51785714285714"/>
+        </scene>
+        <!--Set Budget View Controller-->
+        <scene sceneID="DFL-Nm-oV5">
+            <objects>
+                <viewController modalPresentationStyle="fullScreen" id="OPb-AW-FMZ" customClass="SetBudgetViewController" customModule="Allocat" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="olL-ce-mLk">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="7sj-fD-VxI">
+                                <rect key="frame" x="10" y="64" width="394" height="473.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set Budget" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xY5-Rs-Dn1">
+                                        <rect key="frame" x="0.0" y="0.0" width="394" height="36"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="30"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Each budget period will be calculated based on your selections" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Oz-23-Ihm">
+                                        <rect key="frame" x="0.0" y="61" width="394" height="36"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="zvG-s5-KIk">
+                                        <rect key="frame" x="0.0" y="122" width="394" height="32"/>
+                                        <segments>
+                                            <segment title="Monthly"/>
+                                            <segment title="Quarterly"/>
+                                            <segment title="Biannually"/>
+                                            <segment title="Annually"/>
+                                        </segments>
+                                        <connections>
+                                            <action selector="durationSegmentChanged:" destination="OPb-AW-FMZ" eventType="valueChanged" id="UiD-GD-xID"/>
+                                        </connections>
+                                    </segmentedControl>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="0.00" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="U1y-EH-YKN">
+                                        <rect key="frame" x="0.0" y="178" width="394" height="42"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="35"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                    </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Overview" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HFI-Fp-cgA">
+                                        <rect key="frame" x="0.0" y="245" width="394" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="5vX-sN-DCE">
+                                        <rect key="frame" x="0.0" y="290.5" width="394" height="20.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Month" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DB6-ID-2hx">
+                                                <rect key="frame" x="0.0" y="0.0" width="98.5" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quarter" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2KX-Ti-Tai">
+                                                <rect key="frame" x="98.5" y="0.0" width="98.5" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Biannual" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fg0-dI-MLb">
+                                                <rect key="frame" x="197" y="0.0" width="98.5" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Year" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vtx-QU-CA1">
+                                                <rect key="frame" x="295.5" y="0.0" width="98.5" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="iIY-BX-NLN">
+                                        <rect key="frame" x="0.0" y="336" width="394" height="20.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2sg-Dg-qwz">
+                                                <rect key="frame" x="0.0" y="0.0" width="98.5" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SfP-um-Cun">
+                                                <rect key="frame" x="98.5" y="0.0" width="98.5" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yBA-lK-X0g">
+                                                <rect key="frame" x="197" y="0.0" width="98.5" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PtY-3r-m6p">
+                                                <rect key="frame" x="295.5" y="0.0" width="98.5" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please select which quantity to display for the budget overview" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fVJ-H3-k8C">
+                                        <rect key="frame" x="0.0" y="381.5" width="394" height="36"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="JuG-bv-2aq">
+                                        <rect key="frame" x="0.0" y="442.5" width="394" height="32"/>
+                                        <segments>
+                                            <segment title="Month"/>
+                                            <segment title="Quarter"/>
+                                            <segment title="Biannual"/>
+                                            <segment title="Year"/>
+                                        </segments>
+                                        <connections>
+                                            <action selector="budgetDisplaySegmentChanged:" destination="OPb-AW-FMZ" eventType="valueChanged" id="V8k-6M-ep4"/>
+                                        </connections>
+                                    </segmentedControl>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="27" translatesAutoresizingMaskIntoConstraints="NO" id="gva-3e-9PC">
+                                <rect key="frame" x="99.5" y="792" width="215" height="50"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fmQ-un-JxK">
+                                        <rect key="frame" x="0.0" y="0.0" width="94" height="50"/>
+                                        <color key="backgroundColor" red="0.047478105409999999" green="0.65317357509999996" blue="0.13584278080000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="YOP-Zb-Pwe"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                                        <state key="normal" title="   Confirm   ">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="addIncomeTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ep6-5A-cOL"/>
+                                            <action selector="confirmPressed:" destination="Khf-M5-1EB" eventType="touchUpInside" id="12W-LC-mSK"/>
+                                            <action selector="confirmPressed:" destination="OPb-AW-FMZ" eventType="touchUpInside" id="Jlc-qi-HZc"/>
+                                            <action selector="confirmPressed:" destination="Wo9-Dv-Ubd" eventType="touchUpInside" id="Ymq-fR-5hJ"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0iD-OC-TcB">
+                                        <rect key="frame" x="121" y="0.0" width="94" height="50"/>
+                                        <color key="backgroundColor" red="0.65317357509999996" green="0.0" blue="0.029330588370000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                                        <state key="normal" title="   Cancel   ">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="addExpensesTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ilm-HF-kxq"/>
+                                            <action selector="cancelPressed:" destination="Khf-M5-1EB" eventType="touchUpInside" id="1ea-ID-lO8"/>
+                                            <action selector="cancelPressed:" destination="Wo9-Dv-Ubd" eventType="touchUpInside" id="2kg-YL-47A"/>
+                                            <action selector="cancelPressed:" destination="OPb-AW-FMZ" eventType="touchUpInside" id="nKP-VF-oWG"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="gva-3e-9PC" firstAttribute="centerX" secondItem="olL-ce-mLk" secondAttribute="centerX" id="6og-8J-Igi"/>
+                            <constraint firstItem="7sj-fD-VxI" firstAttribute="leading" secondItem="1XJ-nS-Upr" secondAttribute="leading" constant="10" id="9RS-qp-TH8"/>
+                            <constraint firstItem="1XJ-nS-Upr" firstAttribute="bottom" secondItem="gva-3e-9PC" secondAttribute="bottom" constant="20" id="Ae6-bA-WWz"/>
+                            <constraint firstItem="7sj-fD-VxI" firstAttribute="top" secondItem="1XJ-nS-Upr" secondAttribute="top" constant="20" id="EyY-Ol-Fip"/>
+                            <constraint firstItem="1XJ-nS-Upr" firstAttribute="trailing" secondItem="7sj-fD-VxI" secondAttribute="trailing" constant="10" id="n15-mk-DTg"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="1XJ-nS-Upr"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="STy-KD-r7T"/>
+                    <connections>
+                        <outlet property="amount" destination="U1y-EH-YKN" id="vjv-go-UM5"/>
+                        <outlet property="biannualAmount" destination="yBA-lK-X0g" id="6Ia-Qe-IUq"/>
+                        <outlet property="monthAmount" destination="2sg-Dg-qwz" id="n0h-vi-lLs"/>
+                        <outlet property="quarterAmount" destination="SfP-um-Cun" id="MM2-SK-sZc"/>
+                        <outlet property="yearAmount" destination="PtY-3r-m6p" id="FGx-J4-Zfq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iDn-A5-rXE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="905.79710144927549" y="116.51785714285714"/>
         </scene>
         <!--Income View Controller-->
         <scene sceneID="iHg-6a-tU4">
@@ -650,7 +868,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="933" y="117"/>
+            <point key="canvasLocation" x="816" y="832"/>
         </scene>
     </scenes>
 </document>
