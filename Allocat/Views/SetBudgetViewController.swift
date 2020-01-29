@@ -7,25 +7,62 @@
 //
 
 import UIKit
+import CurrencyTextField
 
 class SetBudgetViewController: UIViewController {
 
     // MARK: IBOutlets
     
-    @IBOutlet weak var amount: UITextField!
+    @IBOutlet weak var amount: CurrencyTextField!
     @IBOutlet weak var monthAmount: UILabel!
     @IBOutlet weak var quarterAmount: UILabel!
     @IBOutlet weak var biannualAmount: UILabel!
     @IBOutlet weak var yearAmount: UILabel!
+    @IBOutlet weak var duration: UISegmentedControl!
+    @IBOutlet weak var selectedForDisplay: UISegmentedControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        amount.delegate = self
+        //amount.delegate = self
+        amount.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
     }
-    
-
+  
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        if let text = textField.text {
+            let formatter = NumberFormatter()
+            formatter.locale = Locale.current
+            formatter.numberStyle = .currency
+            formatter.minimumFractionDigits = 2
+            formatter.maximumFractionDigits = 2
+            
+            guard let number = formatter.number(from: text), let doubleNumber = Double(exactly: number) else { return }
+         
+            let final: Double = {
+                if doubleNumber < 10 {
+                    return doubleNumber * 10
+                } else {
+                    return doubleNumber
+                }
+            }()
+        
+            switch duration.selectedSegmentIndex {
+            case 0: // month
+                monthAmount.text = "\(final)"
+                quarterAmount.text = "\(final * 3)"
+            case 1: // quarter
+                return
+            case 2: // biannual
+                return
+            case 3: // annual
+                return
+            default:
+                return
+            }
+        }
+        
+    }
     /*
     // MARK: - Navigation
 
@@ -57,7 +94,7 @@ class SetBudgetViewController: UIViewController {
 
 // MARK: Text field delegate
 
-extension SetBudgetViewController: UITextFieldDelegate {
+/*extension SetBudgetViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let newCharacters = NSCharacterSet(charactersIn: string)
         let boolIsNumber = NSCharacterSet.decimalDigits.isSuperset(of: newCharacters as CharacterSet)
@@ -92,4 +129,5 @@ extension SetBudgetViewController: UITextFieldDelegate {
             }
         }
     }
-}
+
+}*/

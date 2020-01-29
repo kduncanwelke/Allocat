@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,39 +14,22 @@
 		2D57DD9723C7E66B0036FFEE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D57DD9523C7E66B0036FFEE /* Main.storyboard */; };
 		2D57DD9923C7E66C0036FFEE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D57DD9823C7E66C0036FFEE /* Assets.xcassets */; };
 		2D57DD9C23C7E66C0036FFEE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D57DD9A23C7E66C0036FFEE /* LaunchScreen.storyboard */; };
-		2D57DDA723C7E66C0036FFEE /* AllocatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D57DDA623C7E66C0036FFEE /* AllocatTests.swift */; };
-		2D57DDB223C7E66C0036FFEE /* AllocatUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D57DDB123C7E66C0036FFEE /* AllocatUITests.swift */; };
 		2D57DDC223C7E7430036FFEE /* Expense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D57DDC123C7E7430036FFEE /* Expense.swift */; };
+		2DA1E8BE23E2075E00392312 /* MoneyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA1E8BD23E2075E00392312 /* MoneyManager.swift */; };
 		2DAD1B3223CE332300A54CD4 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAD1B3123CE332300A54CD4 /* Extensions.swift */; };
 		2DAD1B3423CE404300A54CD4 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAD1B3323CE404300A54CD4 /* CoreDataManager.swift */; };
 		2DAD1B3623CE725600A54CD4 /* EntryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAD1B3523CE725600A54CD4 /* EntryManager.swift */; };
 		2DBEE5EF23C8F27C0046DF8A /* Income.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBEE5EE23C8F27C0046DF8A /* Income.swift */; };
 		2DBEE5F123C9164A0046DF8A /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBEE5F023C9164A0046DF8A /* Entry.swift */; };
-		2DBEE5F323C91ADB0046DF8A /* Month.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBEE5F223C91ADB0046DF8A /* Month.swift */; };
 		2DBEE5F723C9217F0046DF8A /* SavedData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2DBEE5F523C9217F0046DF8A /* SavedData.xcdatamodeld */; };
 		2DBEE5F923C931F40046DF8A /* ExpenseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBEE5F823C931F40046DF8A /* ExpenseViewController.swift */; };
 		2DC4FA2623D1175600AE662B /* EntryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC4FA2523D1175600AE662B /* EntryTableViewCell.swift */; };
 		2DEDD8B023DBA815002EC0B1 /* SetBudgetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DEDD8AF23DBA815002EC0B1 /* SetBudgetViewController.swift */; };
+		4715169F80855193C1ED7F33 /* Pods_Allocat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA0EECA76BCDE8A3E083AB8B /* Pods_Allocat.framework */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		2D57DDA323C7E66C0036FFEE /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2D57DD8423C7E66B0036FFEE /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 2D57DD8B23C7E66B0036FFEE;
-			remoteInfo = Allocat;
-		};
-		2D57DDAE23C7E66C0036FFEE /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2D57DD8423C7E66B0036FFEE /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 2D57DD8B23C7E66B0036FFEE;
-			remoteInfo = Allocat;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
+		222123D1DAE94020443403B4 /* Pods-Allocat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Allocat.release.xcconfig"; path = "Target Support Files/Pods-Allocat/Pods-Allocat.release.xcconfig"; sourceTree = "<group>"; };
 		2D15EAB223CCEC0D00A15847 /* IncomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeViewController.swift; sourceTree = "<group>"; };
 		2D57DD8C23C7E66B0036FFEE /* Allocat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Allocat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D57DD8F23C7E66B0036FFEE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -56,23 +39,29 @@
 		2D57DD9823C7E66C0036FFEE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2D57DD9B23C7E66C0036FFEE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2D57DD9D23C7E66C0036FFEE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2D57DDA223C7E66C0036FFEE /* AllocatTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AllocatTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D57DDA623C7E66C0036FFEE /* AllocatTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllocatTests.swift; sourceTree = "<group>"; };
 		2D57DDA823C7E66C0036FFEE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2D57DDAD23C7E66C0036FFEE /* AllocatUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AllocatUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D57DDB123C7E66C0036FFEE /* AllocatUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllocatUITests.swift; sourceTree = "<group>"; };
 		2D57DDB323C7E66C0036FFEE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2D57DDC123C7E7430036FFEE /* Expense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expense.swift; sourceTree = "<group>"; };
+		2DA1E8BD23E2075E00392312 /* MoneyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyManager.swift; sourceTree = "<group>"; };
 		2DAD1B3123CE332300A54CD4 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		2DAD1B3323CE404300A54CD4 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		2DAD1B3523CE725600A54CD4 /* EntryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryManager.swift; sourceTree = "<group>"; };
 		2DBEE5EE23C8F27C0046DF8A /* Income.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Income.swift; sourceTree = "<group>"; };
 		2DBEE5F023C9164A0046DF8A /* Entry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
-		2DBEE5F223C91ADB0046DF8A /* Month.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Month.swift; sourceTree = "<group>"; };
 		2DBEE5F623C9217F0046DF8A /* SavedData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SavedData.xcdatamodel; sourceTree = "<group>"; };
 		2DBEE5F823C931F40046DF8A /* ExpenseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseViewController.swift; sourceTree = "<group>"; };
 		2DC4FA2523D1175600AE662B /* EntryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryTableViewCell.swift; sourceTree = "<group>"; };
 		2DEDD8AF23DBA815002EC0B1 /* SetBudgetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetBudgetViewController.swift; sourceTree = "<group>"; };
+		3239C78CD6C225DBD1D41196 /* Pods_Allocat_AllocatUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Allocat_AllocatUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		340C50D7A3A4B01F4C52BC21 /* Pods-AllocatTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AllocatTests.release.xcconfig"; path = "Target Support Files/Pods-AllocatTests/Pods-AllocatTests.release.xcconfig"; sourceTree = "<group>"; };
+		49C2E7506A283CC71927CB41 /* Pods-Allocat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Allocat.debug.xcconfig"; path = "Target Support Files/Pods-Allocat/Pods-Allocat.debug.xcconfig"; sourceTree = "<group>"; };
+		7614FB97493EFD58DC0A6EC7 /* Pods-Allocat-AllocatUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Allocat-AllocatUITests.release.xcconfig"; path = "Target Support Files/Pods-Allocat-AllocatUITests/Pods-Allocat-AllocatUITests.release.xcconfig"; sourceTree = "<group>"; };
+		90984E5374B64B35E9B5148F /* Pods-AllocatTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AllocatTests.debug.xcconfig"; path = "Target Support Files/Pods-AllocatTests/Pods-AllocatTests.debug.xcconfig"; sourceTree = "<group>"; };
+		E08A5D8EE88BB3AEE2957807 /* Pods-Allocat-AllocatUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Allocat-AllocatUITests.debug.xcconfig"; path = "Target Support Files/Pods-Allocat-AllocatUITests/Pods-Allocat-AllocatUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		EA0EECA76BCDE8A3E083AB8B /* Pods_Allocat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Allocat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F97F671F0E6FDF53FE1633C1 /* Pods_AllocatTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AllocatTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,26 +69,26 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2D57DD9F23C7E66C0036FFEE /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2D57DDAA23C7E66C0036FFEE /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				4715169F80855193C1ED7F33 /* Pods_Allocat.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		22E836F148015DDBAF86016F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				49C2E7506A283CC71927CB41 /* Pods-Allocat.debug.xcconfig */,
+				222123D1DAE94020443403B4 /* Pods-Allocat.release.xcconfig */,
+				E08A5D8EE88BB3AEE2957807 /* Pods-Allocat-AllocatUITests.debug.xcconfig */,
+				7614FB97493EFD58DC0A6EC7 /* Pods-Allocat-AllocatUITests.release.xcconfig */,
+				90984E5374B64B35E9B5148F /* Pods-AllocatTests.debug.xcconfig */,
+				340C50D7A3A4B01F4C52BC21 /* Pods-AllocatTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		2D57DD8323C7E66B0036FFEE = {
 			isa = PBXGroup;
 			children = (
@@ -107,6 +96,8 @@
 				2D57DDA523C7E66C0036FFEE /* AllocatTests */,
 				2D57DDB023C7E66C0036FFEE /* AllocatUITests */,
 				2D57DD8D23C7E66B0036FFEE /* Products */,
+				22E836F148015DDBAF86016F /* Pods */,
+				44D6D52284841482C1010620 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -114,8 +105,6 @@
 			isa = PBXGroup;
 			children = (
 				2D57DD8C23C7E66B0036FFEE /* Allocat.app */,
-				2D57DDA223C7E66C0036FFEE /* AllocatTests.xctest */,
-				2D57DDAD23C7E66C0036FFEE /* AllocatUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -161,8 +150,8 @@
 				2DBEE5F023C9164A0046DF8A /* Entry.swift */,
 				2D57DDC123C7E7430036FFEE /* Expense.swift */,
 				2DBEE5EE23C8F27C0046DF8A /* Income.swift */,
-				2DBEE5F223C91ADB0046DF8A /* Month.swift */,
 				2DAD1B3523CE725600A54CD4 /* EntryManager.swift */,
+				2DA1E8BD23E2075E00392312 /* MoneyManager.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -188,6 +177,16 @@
 			path = "Core Data";
 			sourceTree = "<group>";
 		};
+		44D6D52284841482C1010620 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EA0EECA76BCDE8A3E083AB8B /* Pods_Allocat.framework */,
+				3239C78CD6C225DBD1D41196 /* Pods_Allocat_AllocatUITests.framework */,
+				F97F671F0E6FDF53FE1633C1 /* Pods_AllocatTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -195,9 +194,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2D57DDB623C7E66C0036FFEE /* Build configuration list for PBXNativeTarget "Allocat" */;
 			buildPhases = (
+				105DBE37F444C7FFC1280995 /* [CP] Check Pods Manifest.lock */,
 				2D57DD8823C7E66B0036FFEE /* Sources */,
 				2D57DD8923C7E66B0036FFEE /* Frameworks */,
 				2D57DD8A23C7E66B0036FFEE /* Resources */,
+				2C71604E619433B5E019B300 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -207,42 +208,6 @@
 			productName = Allocat;
 			productReference = 2D57DD8C23C7E66B0036FFEE /* Allocat.app */;
 			productType = "com.apple.product-type.application";
-		};
-		2D57DDA123C7E66C0036FFEE /* AllocatTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 2D57DDB923C7E66C0036FFEE /* Build configuration list for PBXNativeTarget "AllocatTests" */;
-			buildPhases = (
-				2D57DD9E23C7E66C0036FFEE /* Sources */,
-				2D57DD9F23C7E66C0036FFEE /* Frameworks */,
-				2D57DDA023C7E66C0036FFEE /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				2D57DDA423C7E66C0036FFEE /* PBXTargetDependency */,
-			);
-			name = AllocatTests;
-			productName = AllocatTests;
-			productReference = 2D57DDA223C7E66C0036FFEE /* AllocatTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		2D57DDAC23C7E66C0036FFEE /* AllocatUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 2D57DDBC23C7E66C0036FFEE /* Build configuration list for PBXNativeTarget "AllocatUITests" */;
-			buildPhases = (
-				2D57DDA923C7E66C0036FFEE /* Sources */,
-				2D57DDAA23C7E66C0036FFEE /* Frameworks */,
-				2D57DDAB23C7E66C0036FFEE /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				2D57DDAF23C7E66C0036FFEE /* PBXTargetDependency */,
-			);
-			name = AllocatUITests;
-			productName = AllocatUITests;
-			productReference = 2D57DDAD23C7E66C0036FFEE /* AllocatUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
@@ -256,14 +221,6 @@
 				TargetAttributes = {
 					2D57DD8B23C7E66B0036FFEE = {
 						CreatedOnToolsVersion = 11.2.1;
-					};
-					2D57DDA123C7E66C0036FFEE = {
-						CreatedOnToolsVersion = 11.2.1;
-						TestTargetID = 2D57DD8B23C7E66B0036FFEE;
-					};
-					2D57DDAC23C7E66C0036FFEE = {
-						CreatedOnToolsVersion = 11.2.1;
-						TestTargetID = 2D57DD8B23C7E66B0036FFEE;
 					};
 				};
 			};
@@ -281,8 +238,6 @@
 			projectRoot = "";
 			targets = (
 				2D57DD8B23C7E66B0036FFEE /* Allocat */,
-				2D57DDA123C7E66C0036FFEE /* AllocatTests */,
-				2D57DDAC23C7E66C0036FFEE /* AllocatUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -298,21 +253,49 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2D57DDA023C7E66C0036FFEE /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2D57DDAB23C7E66C0036FFEE /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		105DBE37F444C7FFC1280995 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Allocat-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2C71604E619433B5E019B300 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Allocat/Pods-Allocat-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Allocat/Pods-Allocat-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Allocat/Pods-Allocat-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		2D57DD8823C7E66B0036FFEE /* Sources */ = {
@@ -323,7 +306,6 @@
 				2D15EAB323CCEC0D00A15847 /* IncomeViewController.swift in Sources */,
 				2D57DDC223C7E7430036FFEE /* Expense.swift in Sources */,
 				2DBEE5F923C931F40046DF8A /* ExpenseViewController.swift in Sources */,
-				2DBEE5F323C91ADB0046DF8A /* Month.swift in Sources */,
 				2DEDD8B023DBA815002EC0B1 /* SetBudgetViewController.swift in Sources */,
 				2DBEE5F723C9217F0046DF8A /* SavedData.xcdatamodeld in Sources */,
 				2DAD1B3423CE404300A54CD4 /* CoreDataManager.swift in Sources */,
@@ -333,40 +315,12 @@
 				2DC4FA2623D1175600AE662B /* EntryTableViewCell.swift in Sources */,
 				2DAD1B3223CE332300A54CD4 /* Extensions.swift in Sources */,
 				2D57DD9223C7E66B0036FFEE /* SceneDelegate.swift in Sources */,
+				2DA1E8BE23E2075E00392312 /* MoneyManager.swift in Sources */,
 				2DAD1B3623CE725600A54CD4 /* EntryManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2D57DD9E23C7E66C0036FFEE /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				2D57DDA723C7E66C0036FFEE /* AllocatTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2D57DDA923C7E66C0036FFEE /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				2D57DDB223C7E66C0036FFEE /* AllocatUITests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		2D57DDA423C7E66C0036FFEE /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 2D57DD8B23C7E66B0036FFEE /* Allocat */;
-			targetProxy = 2D57DDA323C7E66C0036FFEE /* PBXContainerItemProxy */;
-		};
-		2D57DDAF23C7E66C0036FFEE /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 2D57DD8B23C7E66B0036FFEE /* Allocat */;
-			targetProxy = 2D57DDAE23C7E66C0036FFEE /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		2D57DD9523C7E66B0036FFEE /* Main.storyboard */ = {
@@ -504,15 +458,15 @@
 		};
 		2D57DDB723C7E66C0036FFEE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 49C2E7506A283CC71927CB41 /* Pods-Allocat.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
+				ALWAYS_SEARCH_USER_PATHS = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = A8R365GJ52;
 				INFOPLIST_FILE = Allocat/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.kduncan-welke.Allocat";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -522,103 +476,19 @@
 		};
 		2D57DDB823C7E66C0036FFEE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 222123D1DAE94020443403B4 /* Pods-Allocat.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
+				ALWAYS_SEARCH_USER_PATHS = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = A8R365GJ52;
 				INFOPLIST_FILE = Allocat/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.kduncan-welke.Allocat";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		2D57DDBA23C7E66C0036FFEE /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = A8R365GJ52;
-				INFOPLIST_FILE = AllocatTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.kduncan-welke.AllocatTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Allocat.app/Allocat";
-			};
-			name = Debug;
-		};
-		2D57DDBB23C7E66C0036FFEE /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = A8R365GJ52;
-				INFOPLIST_FILE = AllocatTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.kduncan-welke.AllocatTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Allocat.app/Allocat";
-			};
-			name = Release;
-		};
-		2D57DDBD23C7E66C0036FFEE /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = A8R365GJ52;
-				INFOPLIST_FILE = AllocatUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.kduncan-welke.AllocatUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Allocat;
-			};
-			name = Debug;
-		};
-		2D57DDBE23C7E66C0036FFEE /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = A8R365GJ52;
-				INFOPLIST_FILE = AllocatUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.kduncan-welke.AllocatUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Allocat;
 			};
 			name = Release;
 		};
@@ -639,24 +509,6 @@
 			buildConfigurations = (
 				2D57DDB723C7E66C0036FFEE /* Debug */,
 				2D57DDB823C7E66C0036FFEE /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		2D57DDB923C7E66C0036FFEE /* Build configuration list for PBXNativeTarget "AllocatTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				2D57DDBA23C7E66C0036FFEE /* Debug */,
-				2D57DDBB23C7E66C0036FFEE /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		2D57DDBC23C7E66C0036FFEE /* Build configuration list for PBXNativeTarget "AllocatUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				2D57DDBD23C7E66C0036FFEE /* Debug */,
-				2D57DDBE23C7E66C0036FFEE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

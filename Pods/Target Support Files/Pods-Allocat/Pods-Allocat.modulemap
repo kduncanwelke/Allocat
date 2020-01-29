@@ -1,0 +1,6 @@
+framework module Pods_Allocat {
+  umbrella header "Pods-Allocat-umbrella.h"
+
+  export *
+  module * { export * }
+}
