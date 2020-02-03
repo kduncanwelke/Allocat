@@ -52,6 +52,7 @@ class ViewController: UIViewController {
             print(Calendar.current.isDate(entry.date, equalTo: previousDate, toGranularity: .year))
             print(Calendar.current.isDate(entry.date, equalTo: previousDate, toGranularity: .month))
             
+            // if item is of current month and date, add to first place in array
             if Calendar.current.isDate(entry.date, equalTo: Date(), toGranularity: .year) &&  Calendar.current.isDate(entry.date, equalTo: Date(), toGranularity: .month) {
                 arrayedEntries[index].append(entry)
                 
@@ -71,18 +72,23 @@ class ViewController: UIViewController {
                 print(index)
             } else {
                 print(index)
+                var incomeIndex = 0
+                var expenseIndex = 0
                 
+                // if entry belongs in same group with previous
                 if Calendar.current.isDate(entry.date, equalTo: previousDate, toGranularity: .year) &&  Calendar.current.isDate(entry.date, equalTo: previousDate, toGranularity: .month) {
                     arrayedEntries[index].append(entry)
                     
                     switch entry {
                     case is Income:
                         if let income = entry as? Income {
-                            EntryManager.incomes[index].append(income)
+                            EntryManager.incomes[incomeIndex].append(income)
+                            incomeIndex += 1
                         }
                     case is Expense:
                         if let expense = entry as? Expense {
-                            EntryManager.expenses[index].append(expense)
+                            EntryManager.expenses[expenseIndex].append(expense)
+                            expenseIndex += 1
                         }
                     default:
                         break

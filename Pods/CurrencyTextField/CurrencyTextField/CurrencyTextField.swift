@@ -91,7 +91,7 @@ import UIKit
         if let textFieldString = textFieldString {
             
             //Remove $ sign
-            var toArray = textFieldString.components(separatedBy: "$")
+            var toArray = textFieldString.components(separatedBy: currencyFormattor.currencySymbol)
             cleanNumericString = toArray.joined(separator: "")
             
             //Remove periods, commas

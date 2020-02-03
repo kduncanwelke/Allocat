@@ -28,41 +28,77 @@ class SetBudgetViewController: UIViewController {
         //amount.delegate = self
         amount.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
     }
+    
+    // MARK: Custom functions
   
     @objc func textFieldDidChange(_ textField: UITextField) {
-        if let text = textField.text {
-            let formatter = NumberFormatter()
-            formatter.locale = Locale.current
-            formatter.numberStyle = .currency
-            formatter.minimumFractionDigits = 2
-            formatter.maximumFractionDigits = 2
-            
-            guard let number = formatter.number(from: text), let doubleNumber = Double(exactly: number) else { return }
-         
-            let final: Double = {
-                if doubleNumber < 10 {
-                    return doubleNumber * 10
-                } else {
-                    return doubleNumber
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [unowned self] in
+            if let text = textField.text {
+                let formatter = NumberFormatter()
+                formatter.locale = Locale.current
+                formatter.numberStyle = .currency
+                formatter.minimumFractionDigits = 2
+                formatter.maximumFractionDigits = 2
+                
+                guard let number = formatter.number(from: text), let final = Double(exactly: number) else { return }
+               
+                switch self.duration.selectedSegmentIndex {
+                case 0: // month
+                    let month = formatter.string(from: NSNumber(value: final))
+                    self.monthAmount.text = "\(month ?? "-")"
+                    
+                    let quarter = formatter.string(from: NSNumber(value: final * 3))
+                    self.quarterAmount.text = "\(quarter ?? "-")"
+                    
+                    let biannual = formatter.string(from: NSNumber(value: final * 6))
+                    self.biannualAmount.text = "\(biannual ?? "-")"
+                    
+                    let year = formatter.string(from: NSNumber(value: final * 12))
+                    self.yearAmount.text = "\(year ?? "-")"
+                case 1: // quarter
+                    let month = formatter.string(from: NSNumber(value: final / 3))
+                    self.monthAmount.text = "\(month ?? "-")"
+                    
+                    let quarter = formatter.string(from: NSNumber(value: final))
+                    self.quarterAmount.text = "\(quarter ?? "-")"
+                    
+                    let biannual = formatter.string(from: NSNumber(value: final * 2))
+                    self.biannualAmount.text = "\(biannual ?? "-")"
+                    
+                    let year = formatter.string(from: NSNumber(value: final * 4))
+                    self.yearAmount.text = "\(year ?? "-")"
+                case 2: // biannual
+                    let month = formatter.string(from: NSNumber(value: final / 6))
+                    self.monthAmount.text = "\(month ?? "-")"
+                    
+                    let quarter = formatter.string(from: NSNumber(value: final / 2))
+                    self.quarterAmount.text = "\(quarter ?? "-")"
+                    
+                    let biannual = formatter.string(from: NSNumber(value: final))
+                    self.biannualAmount.text = "\(biannual ?? "-")"
+                    
+                    let year = formatter.string(from: NSNumber(value: final * 2))
+                    self.yearAmount.text = "\(year ?? "-")"
+                case 3: // annual
+                    let month = formatter.string(from: NSNumber(value: final / 12))
+                    self.monthAmount.text = "\(month ?? "-")"
+                    
+                    let quarter = formatter.string(from: NSNumber(value: final / 4))
+                    self.quarterAmount.text = "\(quarter ?? "-")"
+                    
+                    let biannual = formatter.string(from: NSNumber(value: final / 2))
+                    self.biannualAmount.text = "\(biannual ?? "-")"
+                    
+                    let year = formatter.string(from: NSNumber(value: final))
+                    self.yearAmount.text = "\(year ?? "-")"
+                default:
+                    return
                 }
-            }()
-        
-            switch duration.selectedSegmentIndex {
-            case 0: // month
-                monthAmount.text = "\(final)"
-                quarterAmount.text = "\(final * 3)"
-            case 1: // quarter
-                return
-            case 2: // biannual
-                return
-            case 3: // annual
-                return
-            default:
-                return
             }
         }
         
     }
+    
     /*
     // MARK: - Navigation
 
@@ -76,13 +112,14 @@ class SetBudgetViewController: UIViewController {
     // MARK: IBActions
     
     @IBAction func durationSegmentChanged(_ sender: UISegmentedControl) {
-        // TODO: show quantities based on selection
+        textFieldDidChange(amount)
     }
     
     @IBAction func budgetDisplaySegmentChanged(_ sender: UISegmentedControl) {
     }
     
     @IBAction func confirmPressed(_ sender: UIButton) {
+       // save
     }
     
     @IBAction func cancelPressed(_ sender: UIButton) {
