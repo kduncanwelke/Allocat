@@ -18,6 +18,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var limitSpent: UILabel!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var setBudgetButton: UIButton!
     
     // MARK: Variables
     
@@ -30,6 +31,8 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
         NotificationCenter.default.addObserver(self, selector: #selector(refresh), name: NSNotification.Name(rawValue: "refresh"), object: nil)
         
+        NotificationCenter.default.addObserver(self, selector: #selector(updateBudget), name: NSNotification.Name(rawValue: "updateBudget"), object: nil)
+        
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -40,6 +43,10 @@ class ViewController: UIViewController {
     }
     
     // MARK: Custom functions
+    
+    @objc func updateBudget() {
+        updateTotals()
+    }
     
     func groupEntries(entries: [Entry]) -> [[Entry]] {
         var arrayedEntries: [[Entry]] = [[]]
@@ -118,36 +125,78 @@ class ViewController: UIViewController {
                 }
             }
         }
-        
-        updateTotals()
-        print(arrayedEntries)
+     
+        loadBudget()
+       
         return arrayedEntries
     }
     
     func updateTotals() {
+        // show amount spent at top of view based on set budget
+        let amount: Double? = {
+            switch MoneyManager.budgetTime {
+            case .month:
+                return MoneyManager.month
+            case .quarter:
+                return MoneyManager.quarter
+            case .biannual:
+                return MoneyManager.biannual
+            case .year:
+                return MoneyManager.year
+            case .none:
+                return nil
+            }
+        }()
+        
+        let months: Int? = {
+            switch MoneyManager.budgetTime {
+            case .month:
+                return 0
+            case .quarter:
+                return 2
+            case .biannual:
+                return 5
+            case .year:
+                return 11
+            case .none:
+                return nil
+            }
+        }()
+        
         totalOut = 0.0
         totalIn = 0.0
         
-        if let expenses = EntryManager.expenses.first, let incomes = EntryManager.incomes.first {
-            for expense in expenses  {
-                totalOut += expense.amount ?? 0
+        guard let month = months else { return }
+        
+        // show total expenditure and income for budget range
+        for index in 0...month {
+            if EntryManager.expenses.indices.contains(index) {
+                let expenses = EntryManager.expenses[index]
+                
+                for expense in expenses {
+                    totalOut += expense.amount
+                }
             }
             
-            for income in incomes {
-                totalIn += income.amount ?? 0
+            if EntryManager.incomes.indices.contains(index) {
+                let incomes = EntryManager.incomes[index]
+                
+                for income in incomes {
+                    totalIn += income.amount
+                }
             }
         }
-    
-        let netAmount = totalIn - totalOut
         
         let outPriceString = currencyFormatter.string(from: NSNumber(value: totalOut)) ?? " "
         let inPriceString = currencyFormatter.string(from: NSNumber(value: totalIn)) ?? " "
-        let netPriceString = currencyFormatter.string(from: NSNumber(value: netAmount)) ?? " "
         
         moneyOut.text = "-\(outPriceString)"
         moneyIn.text = "+\(inPriceString)"
         
-        limitSpent.text = "\(outPriceString) of $ spent"
+        if amount != nil {
+            guard let number = amount as NSNumber?, let formatted = currencyFormatter.string(from: number) else { return }
+            limitSpent.text = "\(outPriceString) of \(formatted) spent"
+        }
     }
     
     @objc func refresh() {
@@ -166,6 +215,32 @@ class ViewController: UIViewController {
         loadEntries()
         
         tableView.reloadData()
+    }
+    
+    func loadBudget() {
+        var managedContext = CoreDataManager.shared.managedObjectContext
+        var fetchRequest = NSFetchRequest<Budget>(entityName: "Budget")
+        
+        do {
+            let loaded = try managedContext.fetch(fetchRequest)
+            print("loaded budget")
+            
+            // if budget has been set, properly store in object and display
+            if let budget = loaded.first {
+                MoneyManager.loadedBudget = budget
+                MoneyManager.month = budget.month
+                MoneyManager.quarter = budget.quarter
+                MoneyManager.biannual = budget.biannual
+                MoneyManager.year = budget.year
+                MoneyManager.budgetTime = BudgetTime(rawValue: Int(budget.display)) ?? .none
+                
+                updateTotals()
+                setBudgetButton.setTitle("Change?", for: .normal)
+            }
+            
+        } catch let error as NSError {
+            showAlert(title: "Could not retrieve data", message: "\(error.userInfo)")
+        }
     }
     
     func loadEntries() {
@@ -192,12 +267,14 @@ class ViewController: UIViewController {
                 }
             }
             
+            // sort entries by soonest
             EntryManager.entries = EntryManager.entries.sorted(by: {$0.date > $1.date})
             print(EntryManager.entries)
         
+            // group entries into matrix(nested array)
             EntryManager.all = groupEntries(entries: EntryManager.entries)
         } catch let error as NSError {
-            //showAlert(title: "Could not retrieve data", message: "\(error.userInfo)")
+            showAlert(title: "Could not retrieve data", message: "\(error.userInfo)")
         }
     }
 
@@ -248,6 +325,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        // set section titles based on segment and month/year
         switch segmentedControl.selectedSegmentIndex {
         case 0:
             if let item = EntryManager.all[section].first {
@@ -297,6 +375,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         cell.nameLabel.text = object.name
         let numberString = currencyFormatter.string(from: NSNumber(value: object.amount)) ?? " "
         
+        // show different colors for amount depending on if it's an expense or income
         switch object {
             case is Expense:
                 cell.amountLabel.textColor = UIColor(red:0.65, green:0.00, blue:0.03, alpha:1.0)

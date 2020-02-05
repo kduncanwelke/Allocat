@@ -21,82 +21,184 @@ class SetBudgetViewController: UIViewController {
     @IBOutlet weak var duration: UISegmentedControl!
     @IBOutlet weak var selectedForDisplay: UISegmentedControl!
     
+    // MARK: Variables
+    
+    let formatter = NumberFormatter()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        //amount.delegate = self
+        
+        formatter.locale = Locale.current
+        formatter.numberStyle = .currency
+        formatter.minimumFractionDigits = 2
+        formatter.maximumFractionDigits = 2
+        
+        // if budget exists, load it into view so it can be edited
+        if MoneyManager.loadedBudget != nil {
+            let final: Double = {
+                switch MoneyManager.budgetTime {
+                case .month:
+                    return MoneyManager.month
+                case .quarter:
+                    return MoneyManager.quarter
+                case .biannual:
+                    return MoneyManager.biannual
+                case .year:
+                    return MoneyManager.year
+                default:
+                    return 0
+                }
+            }()
+            
+            updateUI(index: MoneyManager.budgetTime.rawValue, final: final)
+            amount.text = formatter.string(from: NSNumber(value: final))
+            selectedForDisplay.selectedSegmentIndex = MoneyManager.budgetTime.rawValue
+        }
+        
         amount.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
     }
     
     // MARK: Custom functions
   
+    // called when text field has content changed
     @objc func textFieldDidChange(_ textField: UITextField) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [unowned self] in
             if let text = textField.text {
-                let formatter = NumberFormatter()
-                formatter.locale = Locale.current
-                formatter.numberStyle = .currency
-                formatter.minimumFractionDigits = 2
-                formatter.maximumFractionDigits = 2
                 
-                guard let number = formatter.number(from: text), let final = Double(exactly: number) else { return }
+                guard let number = self.formatter.number(from: text), let final = Double(exactly: number) else { return }
                
-                switch self.duration.selectedSegmentIndex {
-                case 0: // month
-                    let month = formatter.string(from: NSNumber(value: final))
-                    self.monthAmount.text = "\(month ?? "-")"
-                    
-                    let quarter = formatter.string(from: NSNumber(value: final * 3))
-                    self.quarterAmount.text = "\(quarter ?? "-")"
-                    
-                    let biannual = formatter.string(from: NSNumber(value: final * 6))
-                    self.biannualAmount.text = "\(biannual ?? "-")"
-                    
-                    let year = formatter.string(from: NSNumber(value: final * 12))
-                    self.yearAmount.text = "\(year ?? "-")"
-                case 1: // quarter
-                    let month = formatter.string(from: NSNumber(value: final / 3))
-                    self.monthAmount.text = "\(month ?? "-")"
-                    
-                    let quarter = formatter.string(from: NSNumber(value: final))
-                    self.quarterAmount.text = "\(quarter ?? "-")"
-                    
-                    let biannual = formatter.string(from: NSNumber(value: final * 2))
-                    self.biannualAmount.text = "\(biannual ?? "-")"
-                    
-                    let year = formatter.string(from: NSNumber(value: final * 4))
-                    self.yearAmount.text = "\(year ?? "-")"
-                case 2: // biannual
-                    let month = formatter.string(from: NSNumber(value: final / 6))
-                    self.monthAmount.text = "\(month ?? "-")"
-                    
-                    let quarter = formatter.string(from: NSNumber(value: final / 2))
-                    self.quarterAmount.text = "\(quarter ?? "-")"
-                    
-                    let biannual = formatter.string(from: NSNumber(value: final))
-                    self.biannualAmount.text = "\(biannual ?? "-")"
-                    
-                    let year = formatter.string(from: NSNumber(value: final * 2))
-                    self.yearAmount.text = "\(year ?? "-")"
-                case 3: // annual
-                    let month = formatter.string(from: NSNumber(value: final / 12))
-                    self.monthAmount.text = "\(month ?? "-")"
-                    
-                    let quarter = formatter.string(from: NSNumber(value: final / 4))
-                    self.quarterAmount.text = "\(quarter ?? "-")"
-                    
-                    let biannual = formatter.string(from: NSNumber(value: final / 2))
-                    self.biannualAmount.text = "\(biannual ?? "-")"
-                    
-                    let year = formatter.string(from: NSNumber(value: final))
-                    self.yearAmount.text = "\(year ?? "-")"
-                default:
-                    return
-                }
+                self.updateUI(index: self.duration.selectedSegmentIndex, final: final)
             }
         }
+    }
+    
+    // show amounts properly for each possible range, etc
+    func updateUI(index: Int, final: Double) {
+        switch index {
+        case 0: // month
+            MoneyManager.month = Double(exactly: final) ?? 0
+            MoneyManager.quarter = Double(exactly: final * 3) ?? 0
+            MoneyManager.biannual = Double(exactly: final * 6) ?? 0
+            MoneyManager.year = Double(exactly: final * 12) ?? 0
+            
+            let month = formatter.string(from: NSNumber(value: final))
+            monthAmount.text = "\(month ?? "-")"
+            
+            let quarter = formatter.string(from: NSNumber(value: final * 3))
+            quarterAmount.text = "\(quarter ?? "-")"
+            
+            let biannual = formatter.string(from: NSNumber(value: final * 6))
+            biannualAmount.text = "\(biannual ?? "-")"
+            
+            let year = formatter.string(from: NSNumber(value: final * 12))
+            yearAmount.text = "\(year ?? "-")"
+        case 1: // quarter
+            MoneyManager.month = Double(exactly: final / 3) ?? 0
+            MoneyManager.quarter = Double(exactly: final) ?? 0
+            MoneyManager.biannual = Double(exactly: final * 2) ?? 0
+            MoneyManager.year = Double(exactly: final * 4) ?? 0
+            
+            let month = formatter.string(from: NSNumber(value: final / 3))
+            monthAmount.text = "\(month ?? "-")"
+            
+            let quarter = formatter.string(from: NSNumber(value: final))
+            quarterAmount.text = "\(quarter ?? "-")"
+            
+            let biannual = formatter.string(from: NSNumber(value: final * 2))
+            biannualAmount.text = "\(biannual ?? "-")"
+            
+            let year = formatter.string(from: NSNumber(value: final * 4))
+            yearAmount.text = "\(year ?? "-")"
+        case 2: // biannual
+            MoneyManager.month = Double(exactly: final / 6) ?? 0
+            MoneyManager.quarter = Double(exactly: final / 2) ?? 0
+            MoneyManager.biannual = Double(exactly: final) ?? 0
+            MoneyManager.year = Double(exactly: final * 2) ?? 0
+            
+            let month = formatter.string(from: NSNumber(value: final / 6))
+            monthAmount.text = "\(month ?? "-")"
+            
+            let quarter = formatter.string(from: NSNumber(value: final / 2))
+            quarterAmount.text = "\(quarter ?? "-")"
+            
+            let biannual = formatter.string(from: NSNumber(value: final))
+            biannualAmount.text = "\(biannual ?? "-")"
+            
+            let year = formatter.string(from: NSNumber(value: final * 2))
+            yearAmount.text = "\(year ?? "-")"
+        case 3: // annual
+            MoneyManager.month = Double(exactly: final / 12) ?? 0
+            MoneyManager.quarter = Double(exactly: final / 4) ?? 0
+            MoneyManager.biannual = Double(exactly: final / 2) ?? 0
+            MoneyManager.year = Double(exactly: final) ?? 0
+            
+            let month = formatter.string(from: NSNumber(value: final / 12))
+            monthAmount.text = "\(month ?? "-")"
+            
+            let quarter = formatter.string(from: NSNumber(value: final / 4))
+            quarterAmount.text = "\(quarter ?? "-")"
+            
+            let biannual = formatter.string(from: NSNumber(value: final / 2))
+            biannualAmount.text = "\(biannual ?? "-")"
+            
+            let year = formatter.string(from: NSNumber(value: final))
+            yearAmount.text = "\(year ?? "-")"
+        default:
+            return
+        }
+    }
+    
+    func saveBudget() {
+        var managedContext = CoreDataManager.shared.managedObjectContext
         
+        // if budget does not exist, create new save
+        guard let currentBudget = MoneyManager.loadedBudget else {
+            let budget = Budget(context: managedContext)
+            
+            // check that values are not zero
+            if MoneyManager.month != 0, MoneyManager.quarter != 0, MoneyManager.biannual != 0, MoneyManager.year != 0 {
+                budget.month = MoneyManager.month
+                budget.quarter = MoneyManager.quarter
+                budget.biannual = MoneyManager.biannual
+                budget.year = MoneyManager.year
+                budget.display = Int16(selectedForDisplay.selectedSegmentIndex)
+                
+                do {
+                    try managedContext.save()
+                    print("saved")
+                } catch {
+                    // this should never be displayed but is here to cover the possibility
+                    showAlert(title: "Save failed", message: "Notice: Data has not successfully been saved.")
+                }
+                
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updateBudget"), object: nil)
+                self.dismiss(animated: true, completion: nil)
+            }
+            
+            return
+        }
+        
+        // resave existing budget with new values
+        if MoneyManager.month != 0, MoneyManager.quarter != 0, MoneyManager.biannual != 0, MoneyManager.year != 0 {
+            currentBudget.month = MoneyManager.month
+            currentBudget.quarter = MoneyManager.quarter
+            currentBudget.biannual = MoneyManager.biannual
+            currentBudget.year = MoneyManager.year
+            currentBudget.display = Int16(selectedForDisplay.selectedSegmentIndex)
+            
+            do {
+                try managedContext.save()
+                print("resaved")
+            } catch {
+                // this should never be displayed but is here to cover the possibility
+                showAlert(title: "Save failed", message: "Notice: Data has not successfully been saved.")
+            }
+            
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updateBudget"), object: nil)
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     
     /*
@@ -116,55 +218,17 @@ class SetBudgetViewController: UIViewController {
     }
     
     @IBAction func budgetDisplaySegmentChanged(_ sender: UISegmentedControl) {
+        if let selected = BudgetTime(rawValue: selectedForDisplay.selectedSegmentIndex) {
+            MoneyManager.budgetTime = selected
+        }
     }
     
     @IBAction func confirmPressed(_ sender: UIButton) {
-       // save
+        saveBudget()
     }
     
     @IBAction func cancelPressed(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
-    
-
 }
 
-// MARK: Text field delegate
-
-/*extension SetBudgetViewController: UITextFieldDelegate {
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        let newCharacters = NSCharacterSet(charactersIn: string)
-        let boolIsNumber = NSCharacterSet.decimalDigits.isSuperset(of: newCharacters as CharacterSet)
-        
-        if boolIsNumber == true {
-            return true
-        } else {
-            if string == "." {
-                let countDots = textField.text!.components(separatedBy:".").count - 1
-                if countDots == 0 {
-                    return true
-                } else {
-                    if countDots > 0 && string == "." {
-                        return false
-                    } else {
-                        return true
-                    }
-                }
-            } else if string == "," {
-                let countCommas = textField.text!.components(separatedBy:",").count - 1
-                if countCommas == 0 {
-                    return true
-                } else {
-                    if countCommas > 0 && string == "," {
-                        return false
-                    } else {
-                        return true
-                    }
-                }
-            } else {
-                return false
-            }
-        }
-    }
-
-}*/

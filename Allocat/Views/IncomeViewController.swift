@@ -8,12 +8,13 @@
 
 import UIKit
 import CoreData
+import CurrencyTextField
 
 class IncomeViewController: UIViewController {
     
     // MARK: IBOutlets
     
-    @IBOutlet weak var amount: UITextField!
+    @IBOutlet weak var incomeAmount: CurrencyTextField!
     @IBOutlet weak var name: UITextField!
     @IBOutlet weak var note: UITextField!
     
@@ -30,12 +31,16 @@ class IncomeViewController: UIViewController {
     let categories = ["None", "Allocation", "Dividends", "Freelance", "Gift", "Gig", "Other", "Sales", "Self Employment", "Wages"]
 
     let dateFormatter = DateFormatter()
+    let formatter = NumberFormatter()
+    var enteredNumber = 0.0
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         datePicker.addTarget(self, action: #selector(datePickerChanged(picker:)), for: .valueChanged)
+        incomeAmount.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
+        
         datePicker.maximumDate = Date()
         
         dateFormatter.dateFormat = "yyyy-MM-dd"
@@ -45,7 +50,11 @@ class IncomeViewController: UIViewController {
         
         categoryPicker.dataSource = self
         categoryPicker.delegate = self
-        amount.delegate = self
+        
+        formatter.locale = Locale.current
+        formatter.numberStyle = .currency
+        formatter.minimumFractionDigits = 2
+        formatter.maximumFractionDigits = 2
         
         chosenDate.text = getStringDate(from: datePicker.date)
     }
@@ -53,8 +62,21 @@ class IncomeViewController: UIViewController {
     
     // MARK: Custom functions
     
+    // called when text field has content changed
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [unowned self] in
+            if let text = textField.text {
+                
+                guard let number = self.formatter.number(from: text), let final = Double(exactly: number) else { return }
+                
+                self.enteredNumber = final
+            }
+        }
+    }
+    
     func resetForm() {
-        amount.text = nil
+        incomeAmount.text = nil
+        enteredNumber = 0.0
         name.text = nil
         chosenCategory.text = "None"
         datePicker.setDate(Date(), animated: false)
@@ -76,14 +98,10 @@ class IncomeViewController: UIViewController {
         
         let newIncome = SavedEntry(context: managedContext)
         
-        guard let chosenName = name.text, let text = amount.text else { return }
+        guard let chosenName = name.text else { return }
         
         newIncome.name = chosenName
-        
-        if let number = Double(text) {
-            newIncome.amount = number
-        }
-        
+        newIncome.amount = enteredNumber
         newIncome.category = chosenCategory.text
         newIncome.date = datePicker.date
         newIncome.note = note.text ?? ""
@@ -92,20 +110,12 @@ class IncomeViewController: UIViewController {
         
         EntryManager.savedEntries.append(newIncome)
         
-        /*if let selectedText = chosenCategory.text, let type = Category(rawValue: selectedText) {
-            
-            let income = Income(name: chosenName, date: datePicker.date, amount: newIncome.amount, note: note.text ?? "", category: type)
-            
-            EntryManager.entries.append(income)
-            EntryManager.incomes.append(income)
-        }*/
-        
         do {
             try managedContext.save()
             print("saved")
         } catch {
             // this should never be displayed but is here to cover the possibility
-            //showAlert(title: "Save failed", message: "Notice: Data has not successfully been saved.")
+            showAlert(title: "Save failed", message: "Notice: Data has not successfully been saved.")
         }
         
         resetForm()
@@ -151,7 +161,7 @@ class IncomeViewController: UIViewController {
     }
     
     @IBAction func confirmPressed(_ sender: UIButton) {
-        if amount.text != nil && name.text != nil && name.text != "" && amount.text != "" {
+        if enteredNumber != 0.0 && name.text != nil && name.text != "" {
             saveIncome()
         }
     }
@@ -183,43 +193,3 @@ extension IncomeViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
 }
-
-// MARK: Text field delegate
-
-extension IncomeViewController: UITextFieldDelegate {
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        let newCharacters = NSCharacterSet(charactersIn: string)
-        let boolIsNumber = NSCharacterSet.decimalDigits.isSuperset(of: newCharacters as CharacterSet)
-        
-        if boolIsNumber == true {
-            return true
-        } else {
-            if string == "." {
-                let countDots = textField.text!.components(separatedBy:".").count - 1
-                if countDots == 0 {
-                    return true
-                } else {
-                    if countDots > 0 && string == "." {
-                        return false
-                    } else {
-                        return true
-                    }
-                }
-            } else if string == "," {
-                let countCommas = textField.text!.components(separatedBy:",").count - 1
-                if countCommas == 0 {
-                    return true
-                } else {
-                    if countCommas > 0 && string == "," {
-                        return false
-                    } else {
-                        return true
-                    }
-                }
-            } else {
-                return false
-            }
-        }
-    }
-}
-

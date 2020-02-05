@@ -9,5 +9,18 @@
 import Foundation
 
 struct MoneyManager {
-    static let enteredBudget = 0.00
+    static var loadedBudget: Budget?
+    static var month = 0.0
+    static var quarter = 0.0
+    static var biannual = 0.0
+    static var year = 0.0
+    static var budgetTime: BudgetTime = .none
+}
+
+enum BudgetTime: Int {
+    case month
+    case quarter
+    case biannual
+    case year
+    case none
 }

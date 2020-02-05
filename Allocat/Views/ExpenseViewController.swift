@@ -8,12 +8,13 @@
 
 import UIKit
 import CoreData
+import CurrencyTextField
 
 class ExpenseViewController: UIViewController {
 
     // MARK: IBOutlets
     
-    @IBOutlet weak var amount: UITextField!
+    @IBOutlet weak var expenseAmount: CurrencyTextField!
     @IBOutlet weak var name: UITextField!
     
     @IBOutlet weak var typePicker: UIPickerView!
@@ -28,19 +29,22 @@ class ExpenseViewController: UIViewController {
     @IBOutlet weak var selectedSource: UILabel!
     @IBOutlet weak var noteTextField: UITextField!
     
-    
     // MARK: Variables
     
     let typeNames = ["None", "Clothing", "Electronics", "Entertainment", "Food", "Fuel", "Health", "Home", "Housing", "Insurance", "Gifts", "Media", "Other", "Outdoor", "Personal", "Pet", "Services", "Subscriptions", "Taxes", "Tools", "Transportation", "Travel", "Utilities"]
     
     let sourceNames = ["None", "Bank", "Cash", "Check", "Credit", "Debit"]
     let dateFormatter = DateFormatter()
+    let formatter = NumberFormatter()
+    var enteredNumber = 0.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         datePicker.addTarget(self, action: #selector(datePickerChanged(picker:)), for: .valueChanged)
+        expenseAmount.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
+        
         datePicker.maximumDate = Date()
         
         dateFormatter.dateFormat = "yyyy-MM-dd"
@@ -48,19 +52,36 @@ class ExpenseViewController: UIViewController {
         dimView.isHidden = true
         pickerBackground.isHidden = true
         
-        amount.delegate = self
         typePicker.dataSource = self
         typePicker.delegate = self
         sourcePicker.dataSource = self
         sourcePicker.delegate = self
+        
+        formatter.locale = Locale.current
+        formatter.numberStyle = .currency
+        formatter.minimumFractionDigits = 2
+        formatter.maximumFractionDigits = 2
         
         selectedDate.text = getStringDate(from: datePicker.date)
     }
     
     // MARK: Custom functions
     
+    // called when text field has content changed
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [unowned self] in
+            if let text = textField.text {
+                
+                guard let number = self.formatter.number(from: text), let final = Double(exactly: number) else { return }
+                
+                self.enteredNumber = final
+            }
+        }
+    }
+    
     func resetForm() {
-        amount.text = nil
+        expenseAmount.text = nil
+        enteredNumber = 0.0
         name.text = nil
         selectedSource.text = "None"
         selectedType.text = "None"
@@ -84,14 +105,10 @@ class ExpenseViewController: UIViewController {
         
         let newExpense = SavedEntry(context: managedContext)
         
-        guard let chosenName = name.text, let text = amount.text else { return }
+        guard let chosenName = name.text else { return }
         
         newExpense.name = chosenName
-      
-        if let number = Double(text) {
-            newExpense.amount = number
-        }
-        
+        newExpense.amount = enteredNumber
         newExpense.type = selectedType.text
         newExpense.source = selectedSource.text
         newExpense.date = datePicker.date
@@ -100,25 +117,17 @@ class ExpenseViewController: UIViewController {
         
         EntryManager.savedEntries.append(newExpense)
         
-        /*if let selectedText = selectedType.text, let selectedSource = selectedSource.text,  let type = Type(rawValue: selectedText), let source = Source(rawValue: selectedSource) {
-            
-            let expense = Expense(name: chosenName, amount: newExpense.amount, date: datePicker.date, note: noteTextField.text ?? "", source: source, type: type)
-            
-            EntryManager.entries.append(expense)
-            EntryManager.expenses.append(expense)
-        }*/
-        
         do {
             try managedContext.save()
             print("saved")
         } catch {
             // this should never be displayed but is here to cover the possibility
-            //showAlert(title: "Save failed", message: "Notice: Data has not successfully been saved.")
+            showAlert(title: "Save failed", message: "Notice: Data has not successfully been saved.")
         }
         
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refresh"), object: nil)
         resetForm()
-        //NotificationCenter.default.post(name: NSNotification.Name(rawValue: "getNextPage"), object: nil)
+      
         //self.dismiss(animated: true, completion: nil)
     }
 
@@ -175,7 +184,7 @@ class ExpenseViewController: UIViewController {
     
     @IBAction func confirmPressed(_ sender: UIButton) {
         // check for essential fields then save entry
-        if amount.text != nil && name.text != nil && name.text != "" && amount.text != "" {
+        if enteredNumber != 0.0 && name.text != nil && name.text != "" {
             saveExpense()
         }
     }
@@ -214,46 +223,6 @@ extension ExpenseViewController: UIPickerViewDelegate, UIPickerViewDataSource {
             selectedType.text = typeNames[row]
         } else {
             selectedSource.text = sourceNames[row]
-        }
-    }
-    
-}
-
-// MARK: Text field delegate
-
-extension ExpenseViewController: UITextFieldDelegate {
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        let newCharacters = NSCharacterSet(charactersIn: string)
-        let boolIsNumber = NSCharacterSet.decimalDigits.isSuperset(of: newCharacters as CharacterSet)
-        
-        if boolIsNumber == true {
-            return true
-        } else {
-            if string == "." {
-                let countDots = textField.text!.components(separatedBy:".").count - 1
-                if countDots == 0 {
-                    return true
-                } else {
-                    if countDots > 0 && string == "." {
-                        return false
-                    } else {
-                        return true
-                    }
-                }
-            } else if string == "," {
-                let countCommas = textField.text!.components(separatedBy:",").count - 1
-                if countCommas == 0 {
-                    return true
-                } else {
-                    if countCommas > 0 && string == "," {
-                        return false
-                    } else {
-                        return true
-                    }
-                }
-            } else {
-                return false
-            }
         }
     }
 }
