@@ -19,6 +19,7 @@
 		2DAD1B3223CE332300A54CD4 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAD1B3123CE332300A54CD4 /* Extensions.swift */; };
 		2DAD1B3423CE404300A54CD4 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAD1B3323CE404300A54CD4 /* CoreDataManager.swift */; };
 		2DAD1B3623CE725600A54CD4 /* EntryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAD1B3523CE725600A54CD4 /* EntryManager.swift */; };
+		2DB4667023F4B5FF008F810F /* GraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB4666F23F4B5FF008F810F /* GraphViewController.swift */; };
 		2DBEE5EF23C8F27C0046DF8A /* Income.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBEE5EE23C8F27C0046DF8A /* Income.swift */; };
 		2DBEE5F123C9164A0046DF8A /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBEE5F023C9164A0046DF8A /* Entry.swift */; };
 		2DBEE5F723C9217F0046DF8A /* SavedData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2DBEE5F523C9217F0046DF8A /* SavedData.xcdatamodeld */; };
@@ -48,6 +49,7 @@
 		2DAD1B3123CE332300A54CD4 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		2DAD1B3323CE404300A54CD4 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		2DAD1B3523CE725600A54CD4 /* EntryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryManager.swift; sourceTree = "<group>"; };
+		2DB4666F23F4B5FF008F810F /* GraphViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphViewController.swift; sourceTree = "<group>"; };
 		2DBEE5EE23C8F27C0046DF8A /* Income.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Income.swift; sourceTree = "<group>"; };
 		2DBEE5F023C9164A0046DF8A /* Entry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
 		2DBEE5F623C9217F0046DF8A /* SavedData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SavedData.xcdatamodel; sourceTree = "<group>"; };
@@ -164,6 +166,7 @@
 				2DEDD8AF23DBA815002EC0B1 /* SetBudgetViewController.swift */,
 				2DBEE5F823C931F40046DF8A /* ExpenseViewController.swift */,
 				2D15EAB223CCEC0D00A15847 /* IncomeViewController.swift */,
+				2DB4666F23F4B5FF008F810F /* GraphViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -307,6 +310,7 @@
 				2D57DDC223C7E7430036FFEE /* Expense.swift in Sources */,
 				2DBEE5F923C931F40046DF8A /* ExpenseViewController.swift in Sources */,
 				2DEDD8B023DBA815002EC0B1 /* SetBudgetViewController.swift in Sources */,
+				2DB4667023F4B5FF008F810F /* GraphViewController.swift in Sources */,
 				2DBEE5F723C9217F0046DF8A /* SavedData.xcdatamodeld in Sources */,
 				2DAD1B3423CE404300A54CD4 /* CoreDataManager.swift in Sources */,
 				2D57DD9423C7E66B0036FFEE /* ViewController.swift in Sources */,

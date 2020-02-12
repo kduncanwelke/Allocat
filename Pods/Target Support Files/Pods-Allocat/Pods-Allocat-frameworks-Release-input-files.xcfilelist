@@ -1,2 +1,3 @@
 ${PODS_ROOT}/Target Support Files/Pods-Allocat/Pods-Allocat-frameworks.sh
+${BUILT_PRODUCTS_DIR}/Charts/Charts.framework
 ${BUILT_PRODUCTS_DIR}/CurrencyTextField/CurrencyTextField.framework

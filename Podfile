@@ -7,5 +7,6 @@ target 'Allocat' do
 
   # Pods for Allocat
   pod 'CurrencyTextField'
+  pod 'Charts'
 
 end

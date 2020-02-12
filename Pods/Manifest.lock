@@ -1,16 +1,22 @@
 PODS:
+  - Charts (3.4.0):
+    - Charts/Core (= 3.4.0)
+  - Charts/Core (3.4.0)
   - CurrencyTextField (1.1)
 
 DEPENDENCIES:
+  - Charts
   - CurrencyTextField
 
 SPEC REPOS:
   trunk:
+    - Charts
     - CurrencyTextField
 
 SPEC CHECKSUMS:
+  Charts: 74c9f256eaf0460c0c416522d1cf8c634ea6b286
   CurrencyTextField: 949e4e7b1bb83ef4e49d05af697f9fc898293136
 
-PODFILE CHECKSUM: e59f8178dcfcd4b9e1f2bb71f2384830c09ba620
+PODFILE CHECKSUM: 4c67daf566a765866b834833dedde56b2333d8d1
 
 COCOAPODS: 1.8.4

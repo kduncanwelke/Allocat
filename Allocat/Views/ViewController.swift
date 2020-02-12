@@ -288,6 +288,11 @@ class ViewController: UIViewController {
         tableView.reloadData()
     }
     
+    @IBAction func expenseOverviewTapped(_ sender: UIButton) {
+        performSegue(withIdentifier: "viewGraph", sender: Any?.self)
+    }
+    
+    
     @IBAction func addIncomeTapped(_ sender: UIButton) {
         performSegue(withIdentifier: "addIncome", sender: Any?.self)
     }
