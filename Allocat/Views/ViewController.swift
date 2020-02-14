@@ -15,7 +15,7 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var moneyIn: UILabel!
     @IBOutlet weak var moneyOut: UILabel!
-    @IBOutlet weak var limitSpent: UILabel!
+    @IBOutlet weak var limitSpent: UIButton!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var setBudgetButton: UIButton!
@@ -195,7 +195,7 @@ class ViewController: UIViewController {
         
         if amount != nil {
             guard let number = amount as NSNumber?, let formatted = currencyFormatter.string(from: number) else { return }
-            limitSpent.text = "\(outPriceString) of \(formatted) spent"
+            limitSpent.setTitle("\(outPriceString) of \(formatted) spent", for: .normal)
         }
     }
     
@@ -288,10 +288,9 @@ class ViewController: UIViewController {
         tableView.reloadData()
     }
     
-    @IBAction func expenseOverviewTapped(_ sender: UIButton) {
+    @IBAction func history(_ sender: UIButton) {
         performSegue(withIdentifier: "viewGraph", sender: Any?.self)
     }
-    
     
     @IBAction func addIncomeTapped(_ sender: UIButton) {
         performSegue(withIdentifier: "addIncome", sender: Any?.self)
