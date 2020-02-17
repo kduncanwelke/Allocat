@@ -17,6 +17,10 @@ class GraphViewController: UIViewController {
     @IBOutlet weak var segmentControl: UISegmentedControl!
     @IBOutlet weak var pieChart: PieChartView!
     
+    var selection: Selection = .expense
+    var expenseLoaded = false
+    var incomeLoaded = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -24,6 +28,7 @@ class GraphViewController: UIViewController {
         
         graph.delegate = self
         updateChart()
+        updatePieChart()
     }
     
     // MARK: Custom functions
@@ -100,18 +105,14 @@ class GraphViewController: UIViewController {
         var entries: [ChartDataEntry] = []
         
         var entryList: [[Entry]]
-        var categories: [String: Int]
-        
+    
         switch segmentControl.selectedSegmentIndex {
         case 0:
             entryList = EntryManager.expenses
-            categories = TypesManager.expenseCategories
         case 1:
             entryList = EntryManager.incomes
-            categories = TypesManager.incomeCategories
         default:
             entryList = EntryManager.expenses
-            categories = TypesManager.expenseCategories
         }
         
         guard let list = entryList.first else { return }
@@ -120,77 +121,120 @@ class GraphViewController: UIViewController {
             switch item {
             case is Expense:
                 guard let expense = item as? Expense else { return }
-              
-                var clothing = 0
-                var electronics = 0
                 
+                if expenseLoaded == false {
                 switch expense.type {
                 case .clothing:
-                    clothing += 1
+                    TypesManager.expenseCategories[.clothing]?.quantity += 1
                 case .electronics:
-                    electronics += 1
+                    TypesManager.expenseCategories[.electronics]?.quantity += 1
                 case .entertainment:
-                    <#code#>
+                    TypesManager.expenseCategories[.entertainment]?.quantity += 1
                 case .food:
-                    <#code#>
+                    TypesManager.expenseCategories[.food]?.quantity += 1
                 case .fuel:
-                    <#code#>
+                   TypesManager.expenseCategories[.fuel]?.quantity += 1
                 case .health:
-                    <#code#>
+                    TypesManager.expenseCategories[.health]?.quantity += 1
                 case .home:
-                    <#code#>
+                    TypesManager.expenseCategories[.home]?.quantity += 1
                 case .housing:
-                    <#code#>
+                   TypesManager.expenseCategories[.housing]?.quantity += 1
                 case .insurance:
-                    <#code#>
+                   TypesManager.expenseCategories[.insurance]?.quantity += 1
                 case .gifts:
-                    <#code#>
+                    TypesManager.expenseCategories[.gifts]?.quantity += 1
                 case .media:
-                    <#code#>
+                   TypesManager.expenseCategories[.media]?.quantity += 1
                 case .none:
-                    <#code#>
+                    TypesManager.expenseCategories[.none]?.quantity += 1
                 case .other:
-                    <#code#>
+                    TypesManager.expenseCategories[.other]?.quantity += 1
                 case .outdoor:
-                    <#code#>
+                   TypesManager.expenseCategories[.outdoor]?.quantity += 1
                 case .personal:
-                    <#code#>
+                    TypesManager.expenseCategories[.personal]?.quantity += 1
                 case .pet:
-                    <#code#>
+                    TypesManager.expenseCategories[.pet]?.quantity += 1
                 case .services:
-                    <#code#>
+                    TypesManager.expenseCategories[.services]?.quantity += 1
                 case .subscriptions:
-                    <#code#>
+                   TypesManager.expenseCategories[.subscriptions]?.quantity += 1
                 case .tax:
-                    <#code#>
+                   TypesManager.expenseCategories[.tax]?.quantity += 1
                 case .tools:
-                    <#code#>
+                    TypesManager.expenseCategories[.tools]?.quantity += 1
                 case .transportation:
-                    <#code#>
+                    TypesManager.expenseCategories[.transportation]?.quantity += 1
                 case .travel:
-                    <#code#>
+                    TypesManager.expenseCategories[.travel]?.quantity += 1
                 case .utilities:
-                    <#code#>
-                @unknown default:
-                    <#code#>
+                    TypesManager.expenseCategories[.utilities]?.quantity += 1
                 }
-            case is Income:
+                }
+                
+           case is Income:
+                guard let income = item as? Income else { return }
+                
+                if incomeLoaded == false {
+                switch income.category {
+                case .allocation:
+                    TypesManager.incomeCategories[.allocation]?.quantity += 1
+                case .dividends:
+                    TypesManager.incomeCategories[.dividends]?.quantity += 1
+                case .freelance:
+                    TypesManager.incomeCategories[.freelance]?.quantity += 1
+                case .gift:
+                    TypesManager.incomeCategories[.gift]?.quantity += 1
+                case .gig:
+                    TypesManager.incomeCategories[.gig]?.quantity += 1
+                case .none:
+                    TypesManager.incomeCategories[.none]?.quantity += 1
+                case .other:
+                    TypesManager.incomeCategories[.other]?.quantity += 1
+                case .sales:
+                    TypesManager.incomeCategories[.sales]?.quantity += 1
+                case .selfEmployment:
+                    TypesManager.incomeCategories[.selfEmployment]?.quantity += 1
+                case .wages:
+                    TypesManager.incomeCategories[.wages]?.quantity += 1
+                }
+                }
             default:
                 break
             }
         }
         
-         var entry1 = PieChartDataEntry(value: 0, label: "Gift")
-     
-        let entry1 = PieChartDataEntry(value: Double(number1.value), label: "#1")
-        let entry2 = PieChartDataEntry(value: Double(number2.value), label: "#2")
-        let entry3 = PieChartDataEntry(value: Double(number3.value), label: "#3")
+        switch selection {
+        case .expense:
+            for (type, item) in TypesManager.expenseCategories {
+                if item.quantity > 0 {
+                    entries.append(PieChartDataEntry(value: Double(item.quantity), label: item.name))
+                    print(type)
+                    print(item.quantity)
+                }
+            }
+            
+            expenseLoaded = true
+        case .income:
+            for (type, item) in TypesManager.incomeCategories {
+                if item.quantity > 0 {
+                    entries.append(PieChartDataEntry(value: Double(item.quantity), label: item.name))
+                    print(type)
+                    print(item.quantity)
+                }
+            }
+            
+            incomeLoaded = true
+        }
         
-        let dataSet = PieChartDataSet(entries: entries, label: "Widget Types")
+        let dataSet = PieChartDataSet(entries: entries, label: "")
         let data = PieChartData(dataSet: dataSet)
         pieChart.data = data
-        pieChart.chartDescription?.text = "Share of Widgets by Type"
-        
+        pieChart.holeColor = UIColor.systemBackground
+        dataSet.entryLabelColor = UIColor.gray
+        pieChart.legend.textColor = UIColor.label
+        dataSet.colors = ChartColorTemplates.joyful()
      
         pieChart.notifyDataSetChanged()
     }
@@ -209,6 +253,14 @@ class GraphViewController: UIViewController {
     
     @IBAction func segmentChanged(_ sender: UISegmentedControl) {
         updateChart()
+         
+        if segmentControl.selectedSegmentIndex == 0 {
+            selection = .expense
+        } else {
+            selection = .income
+        }
+        
+        updatePieChart()
     }
     
     @IBAction func cancelPressed(_ sender: UIButton) {

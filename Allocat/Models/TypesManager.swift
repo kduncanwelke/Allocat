@@ -9,42 +9,52 @@
 import Foundation
 
 struct TypesManager {
-    static let incomeCategories = [
-        "None": 0,
-        "Allocation": 0,
-        "Dividends": 0,
-        "Freelance": 0,
-        "Gift": 0,
-        "Gig": 0,
-        "Other": 0,
-        "Sales": 0,
-        "Self Employment": 0,
-        "Wages": 0
+    static var incomeCategories: [Category: PieObject] = [
+        .none: PieObject(name: "None", quantity: 0),
+        .allocation: PieObject(name: "Allocation", quantity: 0),
+        .dividends: PieObject(name: "Dividends", quantity: 0),
+        .freelance: PieObject(name: "Freelance", quantity: 0),
+        .gift: PieObject(name: "Gift", quantity: 0),
+        .gig: PieObject(name: "Gig", quantity: 0),
+        .other: PieObject(name: "Other", quantity: 0),
+        .sales: PieObject(name: "Sales", quantity: 0),
+        .selfEmployment: PieObject(name: "Self Employment", quantity: 0),
+        .wages: PieObject(name: "Wages", quantity: 0),
     ]
     
-    static var expenseCategories: [String: Int] = [
-        "None": 0,
-        "Clothing": 0,
-        "Electronics": 0,
-        "Entertainment": 0,
-        "Food": 0,
-        "Fuel": 0,
-        "Health": 0,
-        "Home": 0,
-        "Housing": 0,
-        "Insurance": 0,
-        "Gifts": 0,
-        "Media": 0,
-        "Other": 0,
-        "Outdoor": 0,
-        "Personal": 0,
-        "Pet": 0,
-        "Services": 0,
-        "Subscriptions": 0,
-        "Taxes": 0,
-        "Tools": 0,
-        "Transportation": 0,
-        "Travel": 0,
-        "Utilities": 0
+    static var expenseCategories: [Type: PieObject] = [
+        .none: PieObject(name: "None", quantity: 0),
+        .clothing: PieObject(name: "Clothing", quantity: 0),
+        .electronics: PieObject(name: "Electronics", quantity: 0),
+        .entertainment: PieObject(name: "Entertainment", quantity: 0),
+        .food: PieObject(name: "Food", quantity: 0),
+        .fuel: PieObject(name: "Fuel", quantity: 0),
+        .health: PieObject(name: "Health", quantity: 0),
+        .home: PieObject(name: "Home", quantity: 0),
+        .housing: PieObject(name: "Housing", quantity: 0),
+        .insurance: PieObject(name: "Insurance", quantity: 0),
+        .gifts: PieObject(name: "Gifts", quantity: 0),
+        .media: PieObject(name: "Media", quantity: 0),
+        .other: PieObject(name: "Other", quantity: 0),
+        .outdoor: PieObject(name: "Outdoor", quantity: 0),
+        .personal: PieObject(name: "Personal", quantity: 0),
+        .pet: PieObject(name: "Pet", quantity: 0),
+        .services: PieObject(name: "Services", quantity: 0),
+        .subscriptions: PieObject(name: "Subscriptions", quantity: 0),
+        .tax: PieObject(name: "Taxes", quantity: 0),
+        .tools: PieObject(name: "Tools", quantity: 0),
+        .transportation: PieObject(name: "Transportation", quantity: 0),
+        .travel: PieObject(name: "Travel", quantity: 0),
+        .utilities: PieObject(name: "Utilities", quantity: 0)
     ]
+}
+
+struct PieObject {
+    let name: String
+    var quantity: Int
+}
+
+enum Selection {
+    case income
+    case expense
 }
